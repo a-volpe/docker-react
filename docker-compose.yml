@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    stdin_open: true # To solve a bug causing app to exit with code 0
+    build:
+      context: . # Folder into which to find the Dockerfile
+      dockerfile: Dockerfile.dev # Name of the Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+  tests:
+    stdin_open: true # To solve a bug causing app to exit with code 0
+    build:
+      context: . # Folder into which to find the Dockerfile
+      dockerfile: Dockerfile.dev # Name of the Dockerfile
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"] # To override the default Dockerfile startup command
