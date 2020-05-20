@@ -9,6 +9,8 @@ RUN npm run build
 
 # Everything above is dumped
 FROM nginx
+# does nothing automatically - to understand which port to expose
+EXPOSE 80
 # The folder in which to put stuff for a static web content is this one
 COPY --from=builder /app/build /usr/share/nginx/html
 # The default commend for nginx starts the service, so no need to specify RUN
